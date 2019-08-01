@@ -15,11 +15,12 @@ export default class App extends React.Component {
   render() {
   const {name} = this.state;
   return (
-    <div className="App">
+    <div className="App clearfix">
         <header className="App-header">
           <h1 className="App-title">Welcome to ChatApp</h1>
         </header>
-
+        <div className="Lobby-container"></div>
+        <div className="Chat-container"></div>
     </div>
   );
 }

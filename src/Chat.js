@@ -11,11 +11,11 @@ export default class Chat extends Component {
   ws = new WebSocket(URL);
   render() {    
     return (
-      <div className="chatContainer">
-        <div className="chatMessageContainer">
+      <div>
+        <div className="ChatMessage-Container">
 
         </div>
-        <div className="chatInputContainer">
+        <div className="ChatInput-Container">
 
         </div>
       </div>
