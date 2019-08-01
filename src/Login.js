@@ -12,14 +12,14 @@ export default class Login extends React.Component{
     };
     render(){
         return(
-            <div className="loginContainer">
-                <p className="welcomeText">Welcome to ChatApp</p>
-                <form className="login-form" 
+            <div className="Login-container">
+                <div className="Login-form">
+                <form 
                     onSubmit={(e) => {
                         e.preventDefault()
                         this.props.handleLogin(true, this.state.name)
                     }}>
-                    <label>Please Enter your Name</label>
+                    <h4>Please Enter your Name</h4>
                     <input
                         id="loginInput"
                         type="text"
@@ -29,8 +29,9 @@ export default class Login extends React.Component{
                     >
                     
                     </input>
-                    <input type="submit" value={'Login'} className="LoginBotton"/>
+                    <input type="submit" value={'Login'} className="Login-Botton"/>
                 </form>
+                </div>
             </div>
         )
     }
