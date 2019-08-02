@@ -9,6 +9,32 @@ export default class Chat extends Component {
     chatHistory: [],
   };
   ws = new WebSocket(URL);
+  
+  componentDidMount(){
+    this.ws.onopen = event => {
+
+    }
+
+    this.ws.onmessage = event => {
+      let data = JSON.parse(event.data);
+      
+      switch (data.action) {
+        case "chatHistory":
+          this.setState({
+            chatHistory: data.data
+          });
+          break;
+      
+        default:
+          break;
+      }
+    }
+
+    this.ws.onclose = event => {
+
+    }
+  }
+
   render() {    
     return (
       <div>
