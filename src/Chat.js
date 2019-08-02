@@ -20,10 +20,10 @@ export default class Chat extends Component {
     this.ws.onmessage = event => {
       
       let data = JSON.parse(event.data);
-      console.log("data",data);
+      //console.log("data",data);
       switch (data.action) {
         case "chatHistory":
-          console.log(data.data);
+          //console.log(data.data);
           this.setState({
             chatHistory: data.data
           });
@@ -44,24 +44,24 @@ export default class Chat extends Component {
     let date = getDate();
     const submitmessage = { action: "message", date: date, name: name, message: message, edited: "false"  };
     this.ws.send(JSON.stringify(submitmessage));
-
-  }
+    }
 
   render() {
     console.log(this.state.chatHistory);
     return (
       <div>
         <div className="ChatHistory-container">
-          <ul>
+          <ul className="ChatHistory">
           {this.state.chatHistory.map((message, index) =>
             <ChatMessage
-            key={index}
-            mid={index}
-            date={message.date}
-            message={message.message}
-            name={message.name}
-            editMessage={this.editMessage}
-            currentUser={this.props.name}
+              key={index}
+              mid={index}
+              date={message.date}
+              action={message.action}
+              message={message.message}
+              name={message.name}
+              editMessage={this.editMessage}
+              currentUser={this.props.name}
             />,
           )}
           </ul>
