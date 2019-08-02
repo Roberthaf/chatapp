@@ -51,7 +51,7 @@ export default class Chat extends Component {
     console.log(this.state.chatHistory);
     return (
       <div>
-        <div className="ChatMessage-Container">
+        <div className="ChatHistory-container">
           <ul>
           {this.state.chatHistory.map((message, index) =>
             <ChatMessage
@@ -66,7 +66,8 @@ export default class Chat extends Component {
           )}
           </ul>
         </div>
-        <div className="ChatInput-Container">
+        <div className="ChatInput-container">
+          {/* Change to input feild */}
             <ChatInput 
               onSubmitMessage ={ message => this.submitMessage(message) }
             />

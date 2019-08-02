@@ -1,0 +1,38 @@
+/* 
+.ChatInput-container{
+
+}
+.chatMessageContainer p {
+    display: block;
+}
+.chatMessageContainer p:hover {
+    background-color: aliceblue;
+} 
+*/
+
+.My-message{
+    background-color: #94C2ED; 
+}
+.Others-message{
+
+    background-color: #86BB71; 
+}
+.Nessage-data{
+    margin-bottom: 15px;
+}
+.Message{
+    color: white;
+    padding: 18px 20px;
+    line-height: 26px;
+    font-size: 16px;
+    border-radius: 7px;
+    margin-bottom: 30px;
+    width: 60%;
+    position: relative;
+}
+.Align-right{
+    text-align: right;
+}
+.Float-right{
+    float: right;
+}
