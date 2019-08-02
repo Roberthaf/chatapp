@@ -33,6 +33,9 @@ wss.on('connection', function connection(ws) {
                     client.send(JSON.stringify({ action: "chatHistroy", data: chatHistory }));
                 });
                 break;
+            case "userDisconnectd":
+
+                break;    
             default:
                 // Handle all other requests
                 wss.clients.forEach(function each(client){
@@ -51,26 +54,22 @@ wss.on('connection', function connection(ws) {
         }); */
 
   });
+
   ws.on('close', function close(data){
     wss.clients.forEach(function each(client) {
-        if(client !== ws && client.readyState === WebSocket.CLOSING){
-            //console.log("WebSocket is closing")
-            clientList = removeUserFromList(clientList, ws.personName);
-            wss.clients.forEach(function each(client) {
-                client.send(JSON.stringify({ action: "clientList", data: clientList }));
+        clientList = removeUserFromList(clientList, ws.personName);
+        let userLeftMessage = {
+            action: "message", 
+            name: ws.personName,
+            date: getDate(),
+            message: " Left chat."
+        };
+        chatHistory.push(userLeftMessage);
 
-                //client.send(JSON.stringify({ action: "userDisconnected", name: ws.personName,  message: ws.personName + "left chat." } ));
-            });
-        }else{
-            //console.log("WebSocket is closing")
-            if(ws.personName){ // If the user force closes the browser
-                clientList = removeUserFromList(clientList, ws.personName);
-                wss.clients.forEach(function each(client) {
-                    client.send(JSON.stringify({ action: "clientList", data: clientList }));
-                    //client.send(JSON.stringify({ action: "userDisconnected", name: ws.personName,  message: ws.personName + "left chat." } ));
-                });
-            }
-        }
+        wss.clients.forEach(function each(client) {
+            client.send(JSON.stringify({ action: "clientList", data: clientList }));
+            client.send(JSON.stringify({ action: "chatHistroy", data: chatHistory }));
+        });
     });
   });
 });
@@ -80,3 +79,30 @@ function removeUserFromList(array, user) {
     let newClientList = array.filter(e => e !== user);
     return newClientList;
 }
+
+function getDate(){
+    let date = new Date();
+    function addZero(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+    };
+    
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let currentDate = addZero(date.getDate()) +" "+ months[date.getMonth()] + " " + addZero(date.getHours())+ ":" + addZero(date.getMinutes());
+    return currentDate;
+  }
+  
+/*
+else{
+            //console.log("WebSocket is closing")
+            if(ws.personName){ // If the user force closes the browser
+                clientList = removeUserFromList(clientList, ws.personName);
+                wss.clients.forEach(function each(client) {
+                    client.send(JSON.stringify({ action: "clientList", data: clientList }));
+                    //client.send(JSON.stringify({ action: "userDisconnected", name: ws.personName,  message: ws.personName + "left chat." } ));
+                });
+            }
+        }
+*/
