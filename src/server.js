@@ -20,10 +20,10 @@ wss.on('connection', function connection(ws) {
         switch(userdata.action){
             case "userConnected":
                 var newMessage = {
-                    action: "message", 
-                    name: userdata.name, 
+                    action: "userConnected", 
+                    name: "MessageBot", 
                     date: userdata.date, 
-                    message: userdata.message,
+                    message: userdata.name +" Joined Chat",
                     edited: userdata.edited
                 };
                 clientList.push(ws.personName);
@@ -71,10 +71,10 @@ wss.on('connection', function connection(ws) {
         if(client !== ws && client.readyState === WebSocket.CLOSING){
             clientList = removeUserFromList(clientList, ws.personName);
             let userLeftMessage = {
-                action: "message", 
-                name: ws.personName,
+                action: "userDisconnected", 
+                name: "MessageBot",
                 date: getDate(),
-                message: " Left Chat"
+                message:  ws.personName + " Left Chat"
             };
             chatHistory.push(userLeftMessage);
     
@@ -103,7 +103,7 @@ function getDate(){
     };
     
     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    let currentDate = addZero(date.getDate()) +" "+ months[date.getMonth()] + " " + addZero(date.getHours())+ ":" + addZero(date.getMinutes());
+    let currentDate = addZero(date.getHours())+ ":" + addZero(date.getMinutes()) + " " + addZero(date.getDate()) +" "+ months[date.getMonth()];
     return currentDate;
   }
 
