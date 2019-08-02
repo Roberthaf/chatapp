@@ -1,11 +1,17 @@
-.Login-container{   
+.Login-container{
+    margin: 0 auto;
+    background-color: #444753;
     width: 750px;
     height: 500px;
+    border-radius: 5px;
+    margin-top: 45px; 
 }
 .Login-form{
     margin: 0 auto;
     width: 300px;
+    padding-top: 55px;
 }
+
 .Login-container input[type=text] {
     padding: 12px 20px;
     margin: 8px 0;
