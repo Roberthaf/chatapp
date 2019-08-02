@@ -1,24 +1,8 @@
-/* 
-.ChatInput-container{
-
-}
-.chatMessageContainer p {
-    display: block;
-}
-.chatMessageContainer p:hover {
-    background-color: aliceblue;
-} 
-*/
-
 .My-message{
     background-color: #94C2ED; 
 }
 .Others-message{
-
     background-color: #86BB71; 
-}
-.Message-data{
-    margin-bottom: 15px;
 }
 .Message{
     color: white;
@@ -39,5 +23,16 @@
 .Connection-message{
     font-style: italic;
     padding-bottom: 10px;
+    padding-top: 10px;
+}
+.Message-data{
+    padding-top:15px;
+    margin:0;
+}    
+.Message-data-name{
 
+}
+.Message-data-time{
+    color: #a8aab1;
+    padding-left: 6px; 
 }
