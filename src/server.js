@@ -19,7 +19,7 @@ wss.on('connection', function connection(ws) {
 
         switch(userdata.action){
             case "userConnected":
-                let newMessage = {
+                var newMessage = {
                     action: "message", 
                     name: userdata.name, 
                     date: userdata.date, 
@@ -33,9 +33,19 @@ wss.on('connection', function connection(ws) {
                     client.send(JSON.stringify({ action: "chatHistroy", data: chatHistory }));
                 });
                 break;
-            case "userDisconnectd":
-
-                break;    
+                case "message":
+                        var message = {
+                            action: "message", 
+                            name: userdata.name, 
+                            date: userdata.date, 
+                            message: userdata.message,
+                            edited: userdata.edited
+                        };
+                        chatHistory.push(message);
+                        wss.clients.forEach(function each(client) {
+                            client.send(JSON.stringify({ action: "chatHistroy", data: chatHistory }));
+                        });
+                    break;
             default:
                 // Handle all other requests
                 wss.clients.forEach(function each(client){
@@ -93,7 +103,7 @@ function getDate(){
     let currentDate = addZero(date.getDate()) +" "+ months[date.getMonth()] + " " + addZero(date.getHours())+ ":" + addZero(date.getMinutes());
     return currentDate;
   }
-  
+
 /*
 else{
             //console.log("WebSocket is closing")
