@@ -18,19 +18,39 @@ export default class App extends React.Component {
       name: username
     });
   }
-  
+
+  getDate = () => {
+    let date = new Date();
+    function addZero(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+    };
+    
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let currentDate = addZero(date.getDate()) +" "+ months[date.getMonth()] + " " + addZero(date.getHours())+ ":" + addZero(date.getMinutes());
+    console.log(date.getDay());
+    return currentDate;
+  }
+
   render() {
     const {name} = this.state;
+    console.log(this.getDate());
     return (
-      <div className="App clearfix">
+      <div className="App">
           <header className="App-header">
             <h1 className="App-title">Welcome to ChatApp</h1>
           </header>
           {
             this.state.isLoggedIn ?
-            <div>
-            <div className="Lobby-container"></div>
-            <div className="Chat-container"></div>
+            <div className="Main-container clearfix">
+              <div className="Lobby-container">
+              
+              </div>
+              <div className="Chat-container">
+              
+              </div>
             </div>
             :
             <Login 
