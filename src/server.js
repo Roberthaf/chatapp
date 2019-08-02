@@ -9,14 +9,14 @@ wss.on('connection', function connection(ws) {
     wss.clients.forEach(function each(client) {
         // on Connect send the clientList and ChatHistory
         client.send(JSON.stringify({ action: "clientList", data: clientList}));
-        client.send(JSON.stringify({ action: "chatHistroy", data: chatHistory }));
+        client.send(JSON.stringify({ action: "chatHistory", data: chatHistory }));
     });
 
     ws.on('message', function incoming(data) {
-        console.log("message", data);
+        
         var userdata = JSON.parse(data);
         ws.personName = userdata.name;
-
+        console.log("message", userdata);
         switch(userdata.action){
             case "userConnected":
                 var newMessage = {
@@ -30,7 +30,7 @@ wss.on('connection', function connection(ws) {
                 chatHistory.push(newMessage);
                 wss.clients.forEach(function each(client) {
                     client.send(JSON.stringify({ action: "clientList", data: clientList}));
-                    client.send(JSON.stringify({ action: "chatHistroy", data: chatHistory }));
+                    client.send(JSON.stringify({ action: "chatHistory", data: chatHistory }));
                 });
                 break;
                 case "message":
@@ -43,7 +43,7 @@ wss.on('connection', function connection(ws) {
                         };
                         chatHistory.push(message);
                         wss.clients.forEach(function each(client) {
-                            client.send(JSON.stringify({ action: "chatHistroy", data: chatHistory }));
+                            client.send(JSON.stringify({ action: "chatHistory", data: chatHistory }));
                         });
                     break;
             default:
@@ -66,20 +66,23 @@ wss.on('connection', function connection(ws) {
   });
 
   ws.on('close', function close(data){
-    wss.clients.forEach(function each(client) {
-        clientList = removeUserFromList(clientList, ws.personName);
-        let userLeftMessage = {
-            action: "message", 
-            name: ws.personName,
-            date: getDate(),
-            message: " Left chat."
-        };
-        chatHistory.push(userLeftMessage);
 
-        wss.clients.forEach(function each(client) {
-            client.send(JSON.stringify({ action: "clientList", data: clientList }));
-            client.send(JSON.stringify({ action: "chatHistroy", data: chatHistory }));
-        });
+    wss.clients.forEach(function each(client) {
+        if(client !== ws && client.readyState === WebSocket.CLOSING){
+            clientList = removeUserFromList(clientList, ws.personName);
+            let userLeftMessage = {
+                action: "message", 
+                name: ws.personName,
+                date: getDate(),
+                message: " Left Chat"
+            };
+            chatHistory.push(userLeftMessage);
+    
+            wss.clients.forEach(function each(client) {
+                client.send(JSON.stringify({ action: "clientList", data: clientList }));
+                client.send(JSON.stringify({ action: "chatHistory", data: chatHistory }));
+            });
+        }
     });
   });
 });
