@@ -17,7 +17,7 @@
 
     background-color: #86BB71; 
 }
-.Nessage-data{
+.Message-data{
     margin-bottom: 15px;
 }
 .Message{
@@ -35,4 +35,9 @@
 }
 .Float-right{
     float: right;
+}
+.Connection-message{
+    font-style: italic;
+    padding-bottom: 10px;
+
 }
