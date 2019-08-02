@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Chat from './Chat';
+import Lobby from './Lobby';
 import Login from './Login';
 
 export default class App extends React.Component {
@@ -30,13 +31,12 @@ export default class App extends React.Component {
     
     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let currentDate = addZero(date.getDate()) +" "+ months[date.getMonth()] + " " + addZero(date.getHours())+ ":" + addZero(date.getMinutes());
-    console.log(date.getDay());
     return currentDate;
   }
 
   render() {
     const {name} = this.state;
-    console.log(this.getDate());
+    
     return (
       <div className="App">
           <header className="App-header">
@@ -44,12 +44,18 @@ export default class App extends React.Component {
           </header>
           {
             this.state.isLoggedIn ?
-            <div className="Main-container clearfix">
+            <div className="Main-container Clearfix">
               <div className="Lobby-container">
-              
+                <Lobby 
+                  name={name}
+                  getDate={this.getDate}
+                />                
               </div>
               <div className="Chat-container">
-              
+                <Chat 
+                  name={name}
+                  getDate={this.getDate}
+                />
               </div>
             </div>
             :

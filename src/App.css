@@ -21,19 +21,20 @@
 .Main-container{
   margin: 0 auto;
   width: 750px;
+  height: 500px;
   background: #444753;
   border-radius: 5px;
   margin-top: 55px;
 }
 
 .Lobby-container{
-  width: 260px;
+  width: 240px;
   float: left;
 }
 
 .Chat-container{
   width: 490px;
-  height: 500px;
+  height:100%;
   float: right;
   background: #F2F5F8;
   border-top-right-radius: 5px;
@@ -41,6 +42,20 @@
   color: #434651;
 }
 
-.clearfix{
+/* .Clearfix{
   overflow-y: auto;
+} */
+.Clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
+
+/* .Clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+} */
