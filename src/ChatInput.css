@@ -1,0 +1,29 @@
+.ChatInput-form{
+    padding-top: 40px;
+}
+.ChatInput-textarea{
+    resize: none;
+    border: none;
+    border-radius: 5px;
+    width: 400px;
+    height:100px;
+    margin: 0 auto;
+    display:block;
+   
+}
+
+.ChatInput-form input[type='submit']{
+    border:none;
+    background-color: none;
+    background: 0%;
+    color: rgb(34, 177, 34);
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: 40px;
+    margin-top: 15px;
+    float: right;
+}
+.ChatInput-form input[type='submit']:hover{
+    color: green;
+    cursor: pointer;
+}
