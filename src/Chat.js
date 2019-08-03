@@ -3,13 +3,18 @@ import './Chat.css';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 
-const URL = 'ws://10.75.53.114:8080';
+const URL = 'ws://192.168.2.114:8080';
 
 export default class Chat extends Component {
-  state = {
-    messages: [],
-    chatHistory: [],
+  constructor(props){
+    super(props);
+    this.state = {
+      messages: [],
+      editMessage: "",
+      chatHistory: [],
+    };
   };
+  
   ws = new WebSocket(URL);
   
   componentDidMount(){
@@ -39,15 +44,21 @@ export default class Chat extends Component {
     }
   }
 
-  submitMessage = (message) => {
+  submitMessage = (message, action, mid,edited) => {
     const { name, getDate } = this.props;
     let date = getDate();
-    const submitmessage = { action: "message", date: date, name: name, message: message, edited: "false"  };
+    const submitmessage = { action: action, date: date, name: name, message: message, edited: edited, mid: mid };
     this.ws.send(JSON.stringify(submitmessage));
-    }
+  }
+  editMessage = messageData => {
+    // If we click on a message we will load the available data nd get the index
+    this.setState({
+      editMessage: messageData.message,
+      mid: messageData.mid
+    });
+  }
 
   render() {
-    console.log(this.state.chatHistory);
     return (
       <div>
         <div className="ChatHistory-container">
@@ -69,7 +80,9 @@ export default class Chat extends Component {
         <div className="ChatInput-container">
           {/* Change to input feild */}
             <ChatInput 
-              onSubmitMessage ={ message => this.submitMessage(message) }
+              onSubmitMessage = {this.submitMessage }
+              editMessage = { this.state.editMessage }
+              mid = { this.state.mid }
             />
         </div>
       </div>

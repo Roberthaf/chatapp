@@ -1,6 +1,6 @@
 .ChatHistory-container{
     height: 400px;
-    border: 1px solid gray;
+    border-bottom: 2px solid white;
     border-top-right-radius: 5px;
     overflow-y: auto;
 }
