@@ -9,9 +9,7 @@
     height:100px;
     margin: 0 auto;
     display:block;
-   
 }
-
 .ChatInput-form input[type='submit']{
     border:none;
     background-color: none;

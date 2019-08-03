@@ -7,9 +7,25 @@ export default class ChatInput extends Component {
     this.state = {
       message: '',
       editmessage: '',
+      action: "message",
+      mid: null,
+      edited: false,
     };
   };
-  
+
+  componentDidUpdate(prevProps){
+    let newMessage = this.props.editMessage;
+    let messId = this.props.mid;
+    if(prevProps.editMessage !== this.props.editMessage){
+      this.setState({
+        action: "editmessage",
+        message: newMessage,
+        mid: messId
+      })
+    }
+    
+  }
+
   componentDidMount(){
     let textarea = document.getElementsByClassName('ChatInput-textarea');
     textarea[0].addEventListener('keypress', (e) => {
@@ -17,22 +33,36 @@ export default class ChatInput extends Component {
       if(key === 13){
         //Enter is key 13
         e.preventDefault();
-        this.props.onSubmitMessage(this.state.message)
-        this.setState({ message: '' })
+        this.props.onSubmitMessage(this.state.message, this.state.action, this.state.mid, this.state.edited)
+        this.setState({ 
+          message: '',
+          // Reset state so ww don't send editMessages
+          messId: null,
+          action: "message",
+          edited: false,
+        })
         }
     });
   }
 
   render() {
+    
     return (
       <form
       id="Submit-form"
         className="ChatInput-form"
         onSubmit={e => {
-          console.log(e)
+         
           e.preventDefault()
-          this.props.onSubmitMessage(this.state.message)
-          this.setState({ message: '' })
+          this.props.onSubmitMessage(this.state.message, this.state.action, this.state.mid, this.state.edited)
+          this.setState({ 
+            message: '',
+            // Reset state so ww don't send editMessages
+            messId: null,
+            action: "message",
+            edited: false,
+        
+          })
         }}
       >
         <textarea
