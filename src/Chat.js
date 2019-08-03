@@ -16,8 +16,12 @@ export default class Chat extends Component {
   };
   
   ws = new WebSocket(URL);
-  
+  componentDidUpdate(){
+    this.updateScroll();
+  }
   componentDidMount(){
+    this.updateScroll();
+    
     this.ws.onopen = event => {
 
     }
@@ -50,6 +54,7 @@ export default class Chat extends Component {
     const submitmessage = { action: action, date: date, name: name, message: message, edited: edited, mid: mid };
     this.ws.send(JSON.stringify(submitmessage));
   }
+
   editMessage = messageData => {
     // If we click on a message we will load the available data nd get the index
     this.setState({
@@ -58,10 +63,15 @@ export default class Chat extends Component {
     });
   }
 
+  updateScroll = () => {
+    let chatHistoryDiv = document.getElementById('chatHistoryDiv');
+    chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
+  }
+
   render() {
     return (
       <div>
-        <div className="ChatHistory-container">
+        <div id="chatHistoryDiv"className="ChatHistory-container">
           <ul className="ChatHistory">
           {this.state.chatHistory.map((message, index) =>
             <ChatMessage
