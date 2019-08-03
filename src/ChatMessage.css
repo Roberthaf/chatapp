@@ -24,6 +24,7 @@
     font-style: italic;
     padding-bottom: 10px;
     padding-top: 10px;
+    font-size: 11px;
 }
 .Message-data{
     padding-top:15px;
@@ -35,4 +36,15 @@
 .Message-data-time{
     color: #a8aab1;
     padding-left: 6px; 
+}
+
+.Message-data-edit{
+    float: right;
+    margin-top: 15px;
+    font-size: 11px;
+    cursor: pointer;
+}
+.Message-data-edit:hover{
+    text-decoration: underline;
+    color: black;
 }

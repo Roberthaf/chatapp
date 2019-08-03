@@ -20,9 +20,19 @@ export default ({ mid, name, date, message, editMessage, edited, currentUser,act
         </div>
         <div 
           className={ currentUser===name ? "Message My-message" : "Message Others-message Float-right "}
-          onClick={() => editMessage({mid, name, date, message})}
+          
         >
         <span>{message}</span>
+        <span className="Message-data-edited-message">{edited}</span>
+        { 
+          currentUser===name ? 
+          <span 
+          className="Message-data-edit" 
+          onClick={() => editMessage({mid, name, date, message})} 
+        >
+          Edit
+          </span> : null
+        }
         </div>
       </div>
       : 
