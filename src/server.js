@@ -19,15 +19,15 @@ wss.on('connection', function connection(ws) {
         console.log("message", userdata);
         switch(userdata.action){
             case "userConnected":
-                var newMessage = {
-                    action: "userConnected", 
+                var loginMessage = {
+                    action: "connection", 
                     name: "MessageBot", 
                     date: userdata.date, 
                     message: userdata.name +" Joined Chat",
                     edited: userdata.edited
                 };
                 clientList.push(ws.personName);
-                chatHistory.push(newMessage);
+                chatHistory.push(loginMessage);
                 wss.clients.forEach(function each(client) {
                     client.send(JSON.stringify({ action: "clientList", data: clientList}));
                     client.send(JSON.stringify({ action: "chatHistory", data: chatHistory }));
@@ -46,6 +46,20 @@ wss.on('connection', function connection(ws) {
                             client.send(JSON.stringify({ action: "chatHistory", data: chatHistory }));
                         });
                     break;
+                case "editmessage":
+                        let i = userdata.mid;
+                        let editMessage = {
+                            action: "message", 
+                            name: userdata.name, 
+                            date: userdata.date, 
+                            message: userdata.message,
+                            edited: true
+                        };
+                        chatHistory[i] = editMessage
+                        wss.clients.forEach(function each(client) {
+                            client.send(JSON.stringify({ action: "chatHistory", data: chatHistory }));
+                        });
+                    break;
             default:
                 // Handle all other requests
                 wss.clients.forEach(function each(client){
@@ -54,15 +68,6 @@ wss.on('connection', function connection(ws) {
                 break;
 
         }
-/*         wss.clients.forEach(function each(client) {
-            if (client !== ws && client.readyState === WebSocket.OPEN) {
-                client.send(JSON.stringify({
-                    name: ws.personName,
-                    message: data,}
-                    ));
-            }
-        }); */
-
   });
 
   ws.on('close', function close(data){
@@ -71,7 +76,7 @@ wss.on('connection', function connection(ws) {
         if(client !== ws && client.readyState === WebSocket.CLOSING){
             clientList = removeUserFromList(clientList, ws.personName);
             let userLeftMessage = {
-                action: "userDisconnected", 
+                action: "connection", 
                 name: "MessageBot",
                 date: getDate(),
                 message:  ws.personName + " Left Chat"
@@ -97,25 +102,21 @@ function getDate(){
     let date = new Date();
     function addZero(i) {
         if (i < 10) {
-          i = "0" + i;
+            i = "0" + i;
         }
         return i;
     };
-    
+
     let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     let currentDate = addZero(date.getHours())+ ":" + addZero(date.getMinutes()) + " " + addZero(date.getDate()) +" "+ months[date.getMonth()];
     return currentDate;
-  }
+}
 
-/*
-else{
-            //console.log("WebSocket is closing")
-            if(ws.personName){ // If the user force closes the browser
-                clientList = removeUserFromList(clientList, ws.personName);
-                wss.clients.forEach(function each(client) {
-                    client.send(JSON.stringify({ action: "clientList", data: clientList }));
-                    //client.send(JSON.stringify({ action: "userDisconnected", name: ws.personName,  message: ws.personName + "left chat." } ));
-                });
+  /*         wss.clients.forEach(function each(client) {
+            if (client !== ws && client.readyState === WebSocket.OPEN) {
+                client.send(JSON.stringify({
+                    name: ws.personName,
+                    message: data,}
+                    ));
             }
-        }
-*/
+        }); */
