@@ -1,7 +1,7 @@
 import React from 'react';
 import './ChatMessage.css';
 
-export default ({ mid, name, date, message, editMessage, edited, currentUser, action }) =>
+export default ({ mid, name, date, message, editMessage, edited, currentUser, action, deleteMessage }) =>
 <li className="Clearfix">  
   {action === ("connection") ?  
     <div className={"Connection-message"}>
@@ -9,7 +9,7 @@ export default ({ mid, name, date, message, editMessage, edited, currentUser, ac
       <span>{date } </span>
       <span>{message}</span>
     </div> : null }
-    {console.log(edited)}
+   
    {action === "message" ? 
       <div>
         <div 
@@ -27,12 +27,21 @@ export default ({ mid, name, date, message, editMessage, edited, currentUser, ac
        
         { 
           currentUser===name ? 
+          <div className="Message-data-editDiv">
+          <span 
+            className="Message-data-delete" 
+            onClick={() => deleteMessage({mid, name, date, message})} 
+          >
+            <i className="fas fa-times"></i>
+          </span> 
           <span 
             className="Message-data-edit" 
             onClick={() => editMessage({mid, name, date, message})} 
           >
           Edit
-          </span> : null
+          </span> 
+
+          </div>: null
         }
         </div>
       </div>

@@ -1,5 +1,6 @@
 .My-message{
-    background-color: #94C2ED; 
+    background-color: #94C2ED;
+    position: relative;
 }
 .Others-message{
     background-color: #86BB71; 
@@ -27,6 +28,7 @@
     font-size: 11px;
 }
 .Message-data{
+    
     padding-top:15px;
     margin:0;
 }    
@@ -41,14 +43,27 @@
 }
 
 .Message-data-edit{
-    float: right;
-    margin-top: 15px;
+    position: absolute;
     font-size: 11px;
     cursor: pointer;
+    right:10px;
+    bottom: 0px;
 }
+.Message-data-delete{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    color:rgb(218, 98, 98);
+}
+
+.Message-data-delete:hover{
+    color: red;
+    cursor: pointer;
+}
+
 .Message-data-edited-message{
     font-size: 10px;
-   font-style: italic;
+    font-style: italic;
     
 }
 .Message-data-edit:hover{
