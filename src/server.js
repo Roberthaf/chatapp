@@ -66,7 +66,6 @@ wss.on('connection', function connection(ws) {
                         });
                     break;
                 case "deletemessage":
-                    console.log(userdata);
                     let j = userdata.mid;
                     let deleteMessage = {
                         action: "connection", 
@@ -75,7 +74,6 @@ wss.on('connection', function connection(ws) {
                         message: userdata.name + " Deleted the message"
                     };
                     chatHistory[j] = deleteMessage;
-                    console.log(chatHistory)
                     wss.clients.forEach(function each(client) {
                         client.send(JSON.stringify({ action: "chatHistory", data: chatHistory }));
                     });
