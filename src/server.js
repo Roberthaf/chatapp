@@ -16,7 +16,7 @@ wss.on('connection', function connection(ws) {
         
         var userdata = JSON.parse(data);
         ws.personName = userdata.name;
-        console.log("message", userdata);
+        //console.log("message", userdata);
         switch(userdata.action){
             case "userConnected":
                 var loginMessage = {
@@ -61,11 +61,26 @@ wss.on('connection', function connection(ws) {
                             date: userdata.date, 
                             message: userdata.name + " Edited a message" ,
                         };
-                        chatHistory[i] = editMessage
+                        chatHistory[i] = editMessage;
                         chatHistory.push(userEditMessage);
                         wss.clients.forEach(function each(client) {
                             client.send(JSON.stringify({ action: "chatHistory", data: chatHistory }));
                         });
+                    break;
+                case "deletemessage":
+                    console.log(userdata);
+                    let j = userdata.mid;
+                    let deleteMessage = {
+                        action: "connection", 
+                        name: "MessageBot", 
+                        date: userdata.date, 
+                        message: userdata.name + " Deleted the message"
+                    };
+                    chatHistory[j] = deleteMessage;
+                    console.log(chatHistory)
+                    wss.clients.forEach(function each(client) {
+                        client.send(JSON.stringify({ action: "chatHistory", data: chatHistory }));
+                    });
                     break;
             default:
                 // Handle all other requests
