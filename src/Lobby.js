@@ -69,7 +69,7 @@ export default class Lobby extends React.PureComponent{
         return(
             <div>
                 <div className="Lobby-header">
-                    <h3 className="Lobby-header-text">Users In Lobby</h3> 
+                    <h3 className="Lobby-header-text">Users In Lobby ({this.state.clients.length})</h3> 
                 </div>
                 <div className="User-list">
                     <ul>
