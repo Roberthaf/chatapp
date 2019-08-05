@@ -9,7 +9,6 @@ export default class ChatInput extends Component {
       editmessage: '',
       action: "message",
       mid: null,
-      edited: false,
     };
   };
 
@@ -20,10 +19,9 @@ export default class ChatInput extends Component {
       this.setState({
         action: "editmessage",
         message: newMessage,
-        mid: messId
+        mid: messId,
       })
     }
-    
   }
 
   componentDidMount(){
@@ -33,13 +31,12 @@ export default class ChatInput extends Component {
       if(key === 13){
         //Enter is key 13
         e.preventDefault();
-        this.props.onSubmitMessage(this.state.message, this.state.action, this.state.mid, this.state.edited)
+        this.props.onSubmitMessage(this.state.message, this.state.action, this.state.mid)
         this.setState({ 
           message: '',
-          // Reset state so ww don't send editMessages
+          // Reset state so we don't send editMessages
           messId: null,
           action: "message",
-          edited: false,
         })
         }
     });
@@ -54,14 +51,12 @@ export default class ChatInput extends Component {
         onSubmit={e => {
          
           e.preventDefault()
-          this.props.onSubmitMessage(this.state.message, this.state.action, this.state.mid, this.state.edited)
+          this.props.onSubmitMessage(this.state.message, this.state.action, this.state.mid)
           this.setState({ 
             message: '',
-            // Reset state so ww don't send editMessages
+            // Reset state so we don't send editMessages
             messId: null,
-            action: "message",
-            edited: false,
-        
+            action: "message",        
           })
         }}
       >
