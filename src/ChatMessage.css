@@ -31,7 +31,7 @@
     margin:0;
 }    
 .Message-data-name{
-
+    font-weight: 600px;
 }
 .Message-data-time{
     color: #a8aab1;
@@ -43,6 +43,10 @@
     margin-top: 15px;
     font-size: 11px;
     cursor: pointer;
+}
+.Message-data-edited-message{
+    font-size: 10px;
+    margin-left: 70px;
 }
 .Message-data-edit:hover{
     text-decoration: underline;
