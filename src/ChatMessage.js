@@ -17,7 +17,7 @@ export default ({ mid, name, date, message, editMessage, edited, currentUser, ac
         >
         <span className="Message-data-name">{name}</span>
         <span className="Message-data-time">{date}</span>
-        { edited ? <span className="Message-data-edited-message"> Message edited</span> : null }
+        { edited ? <span className="Message-data-edited-message"> Message edited </span> : null }
         </div>
         <div 
           className={ currentUser===name ? "Message My-message" : "Message Others-message Float-right "}
