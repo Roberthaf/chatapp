@@ -63,12 +63,26 @@ export default class Chat extends Component {
     });
   }
 
+  deleteMessage = messageData => {
+    
+    let submitDelete = window.confirm("Are you sure you want to delete message?")
+    if(submitDelete === true){
+      let mid = messageData.mid;
+      const message = { action: "deletemessage", date: messageData.date, name: messageData.name, mid: mid };
+      console.log(message)
+      this.ws.send(JSON.stringify(message));
+    }else{
+      //  
+    }
+  }
+
   updateScroll = () => {
     let chatHistoryDiv = document.getElementById('chatHistoryDiv');
     chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
   }
 
   render() {
+    console.log(this.state.chatHistory)
     return (
       <div>
         <div id="chatHistoryDiv"className="ChatHistory-container">
@@ -85,6 +99,7 @@ export default class Chat extends Component {
               editMessage={this.editMessage}
               currentUser={this.props.name}
               edited={message.edited}
+              deleteMessage={this.deleteMessage}
             />
             
           )}
