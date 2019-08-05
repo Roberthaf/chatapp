@@ -1,5 +1,28 @@
-# Chat
+# ChatApp
+This my version of a chat application.
+Basic idea is to work with two arrays, a client and chatHistory we then update them and send to all users,
+using WS.
+The users can delete and edit messages. If a message is "deleted" the content of the chatHistory is changed,
+and a message brodcasted saying the "Robert deleted the message", so there is no need for slicing or splicing,
+and the delete message will be visible to all.
 
+## Extra tasks
+The only extra task i did was an alternative look.
+
+## Time in total
+In total about 5.5 hours about 4 hours for core functions and basic looks,
+then rest was on the design of the alternative look.
+
+## To Run.
+
+its a basic
+ - "npm install" to get the packages
+ - npm run start and get you IP address
+ - In both Chat.js and Lobby.js add the IP address to the "const URL"
+ - go to /src and do "node server.js"
+ - Then you are good to go!
+
+# Chat
 - Task: implement a chat client and server
 - Position: front-end developer at Pexip
 
