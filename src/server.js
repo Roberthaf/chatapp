@@ -13,10 +13,8 @@ wss.on('connection', function connection(ws) {
     });
 
     ws.on('message', function incoming(data) {
-        
         var userdata = JSON.parse(data);
         ws.personName = userdata.name;
-        //console.log("message", userdata);
         switch(userdata.action){
             case "userConnected":
                 var loginMessage = {

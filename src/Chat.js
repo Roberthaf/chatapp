@@ -3,7 +3,8 @@ import './Chat.css';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
 
-const URL = 'ws://192.168.2.114:8080';
+// Ad your own IP to make WS work on you local netWork
+const URL = 'ws://{YOUR_IP}:8080';
 
 export default class Chat extends Component {
   constructor(props){
@@ -19,6 +20,7 @@ export default class Chat extends Component {
   componentDidUpdate(){
     this.updateScroll();
   }
+
   componentDidMount(){
     this.updateScroll();
     
@@ -64,15 +66,13 @@ export default class Chat extends Component {
   }
 
   deleteMessage = messageData => {
-    
     let submitDelete = window.confirm("Are you sure you want to delete message?")
     if(submitDelete === true){
       let mid = messageData.mid;
       const message = { action: "deletemessage", date: messageData.date, name: messageData.name, mid: mid };
-      console.log(message)
       this.ws.send(JSON.stringify(message));
     }else{
-      //  
+      //  Do nothing we are canceling
     }
   }
 
@@ -82,13 +82,11 @@ export default class Chat extends Component {
   }
 
   render() {
-    console.log(this.state.chatHistory)
     return (
       <div>
         <div id="chatHistoryDiv"className="ChatHistory-container">
           <ul className="ChatHistory">
           {this.state.chatHistory.map((message, index) =>
-          
             <ChatMessage
               key={index}
               mid={index}
@@ -101,12 +99,10 @@ export default class Chat extends Component {
               edited={message.edited}
               deleteMessage={this.deleteMessage}
             />
-            
           )}
           </ul>
         </div>
         <div className="ChatInput-container">
-          {/* Change to input feild */}
             <ChatInput 
               onSubmitMessage = {this.submitMessage }
               editMessage = { this.state.editMessage }

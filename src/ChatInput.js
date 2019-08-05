@@ -19,8 +19,8 @@ export default class ChatInput extends Component {
       this.setState({
         action: "editmessage",
         message: newMessage,
-        mid: messId,
-      })
+        mid: messId
+      });
     }
   }
 
@@ -29,27 +29,25 @@ export default class ChatInput extends Component {
     textarea[0].addEventListener('keypress', (e) => {
       var key = e.which || e.keyCode;
       if(key === 13){
-        //Enter is key 13
-        e.preventDefault();
-        this.props.onSubmitMessage(this.state.message, this.state.action, this.state.mid)
-        this.setState({ 
-          message: '',
-          // Reset state so we don't send editMessages
-          messId: null,
-          action: "message",
-        })
+          //Enter is key 13
+          e.preventDefault();
+          this.props.onSubmitMessage(this.state.message, this.state.action, this.state.mid)
+          this.setState({
+            message: '',
+            // Reset state so we don't send editMessages
+            messId: null,
+            action: "message",
+          });
         }
     });
   }
 
   render() {
-    
     return (
       <form
       id="Submit-form"
         className="ChatInput-form"
         onSubmit={e => {
-         
           e.preventDefault()
           this.props.onSubmitMessage(this.state.message, this.state.action, this.state.mid)
           this.setState({ 

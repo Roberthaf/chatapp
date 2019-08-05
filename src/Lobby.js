@@ -1,7 +1,9 @@
 import React from 'react';
 import './Lobby.css';
 
-const URL = 'ws://192.168.2.114:8080';
+// Ad your own IP to make WS work on you local netWork
+const URL = 'ws://{YOUR_IP}:8080';
+
 
 export default class Lobby extends React.PureComponent{
     constructor(props){
@@ -77,7 +79,6 @@ export default class Lobby extends React.PureComponent{
                         this.state.clients.map( (client, index) => <li key={index}> {client}</li> )
                     }    
                     </ul>
-                
                 </div>
             </div>
         );
