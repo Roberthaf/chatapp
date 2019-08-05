@@ -127,12 +127,3 @@ function getDate(){
     let currentDate = addZero(date.getHours())+ ":" + addZero(date.getMinutes()) + " " + addZero(date.getDate()) +" "+ months[date.getMonth()];
     return currentDate;
 }
-
-  /*         wss.clients.forEach(function each(client) {
-            if (client !== ws && client.readyState === WebSocket.OPEN) {
-                client.send(JSON.stringify({
-                    name: ws.personName,
-                    message: data,}
-                    ));
-            }
-        }); */
