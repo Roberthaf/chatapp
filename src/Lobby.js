@@ -1,7 +1,7 @@
 import React from 'react';
 import './Lobby.css';
 
-const URL = 'ws://10.75.53.114:8080';
+const URL = 'ws://192.168.2.114:8080';
 
 export default class Lobby extends React.PureComponent{
     constructor(props){
@@ -53,7 +53,7 @@ export default class Lobby extends React.PureComponent{
 
         }
     this.ws.onclose = event => {
-            let {getDate} = this.props;
+            //let {getDate} = this.props;
             //let date = getDate();
             
             //this.sendData("userDisconnectd", name, date, " left chat." );
@@ -69,7 +69,7 @@ export default class Lobby extends React.PureComponent{
         return(
             <div>
                 <div className="Lobby-header">
-                    <p>Users In Lobby</p>
+                    <h3 className="Lobby-header-text">Users In Lobby</h3> 
                 </div>
                 <div className="User-list">
                     <ul>
