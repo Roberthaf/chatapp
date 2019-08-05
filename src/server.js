@@ -55,7 +55,14 @@ wss.on('connection', function connection(ws) {
                             message: userdata.message,
                             edited: true
                         };
+                        var userEditMessage = {
+                            action: "connection", 
+                            name: "MessageBot", 
+                            date: userdata.date, 
+                            message: userdata.name + " Edited a message" ,
+                        };
                         chatHistory[i] = editMessage
+                        chatHistory.push(userEditMessage);
                         wss.clients.forEach(function each(client) {
                             client.send(JSON.stringify({ action: "chatHistory", data: chatHistory }));
                         });
