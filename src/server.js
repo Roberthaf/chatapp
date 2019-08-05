@@ -94,6 +94,15 @@ wss.on('connection', function connection(ws) {
                 client.send(JSON.stringify({ action: "clientList", data: clientList }));
                 client.send(JSON.stringify({ action: "chatHistory", data: chatHistory }));
             });
+        }else{
+            
+            if(ws.personName){ // If the user force closes the browser
+                clientList = removeUserFromList(clientList, ws.personName);
+                wss.clients.forEach(function each(client) {
+                    client.send(JSON.stringify({ action: "clientList", data: clientList }));
+                    client.send(JSON.stringify({ action: "chatHistory", data: chatHistory }));
+                });
+            }
         }
     });
   });
