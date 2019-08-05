@@ -48,7 +48,7 @@ export default class Chat extends Component {
     }
   }
 
-  submitMessage = (message, action, mid,edited) => {
+  submitMessage = (message, action, mid, edited) => {
     const { name, getDate } = this.props;
     let date = getDate();
     const submitmessage = { action: action, date: date, name: name, message: message, edited: edited, mid: mid };
@@ -74,6 +74,7 @@ export default class Chat extends Component {
         <div id="chatHistoryDiv"className="ChatHistory-container">
           <ul className="ChatHistory">
           {this.state.chatHistory.map((message, index) =>
+          
             <ChatMessage
               key={index}
               mid={index}
@@ -83,7 +84,9 @@ export default class Chat extends Component {
               name={message.name}
               editMessage={this.editMessage}
               currentUser={this.props.name}
-            />,
+              edited={message.edited}
+            />
+            
           )}
           </ul>
         </div>
