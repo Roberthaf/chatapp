@@ -39,7 +39,7 @@ wss.on('connection', function connection(ws) {
                             name: userdata.name, 
                             date: userdata.date, 
                             message: userdata.message,
-                            edited: userdata.edited
+                            edited: false
                         };
                         chatHistory.push(message);
                         wss.clients.forEach(function each(client) {
