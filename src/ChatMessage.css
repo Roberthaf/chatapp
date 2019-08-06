@@ -3,7 +3,8 @@
     position: relative;
 }
 .Others-message{
-    background-color: #86BB71; 
+    background-color: #86BB71;
+    margin-right: 30px;
 }
 .Message{
     color: white;
@@ -17,6 +18,7 @@
 }
 .Align-right{
     text-align: right;
+    padding-right:30px;
 }
 .Float-right{
     float: right;
@@ -28,9 +30,8 @@
     font-size: 11px;
 }
 .Message-data{
-    
+
     padding-top:15px;
-    margin:0;
 }    
 .Message-data-name{
     font-weight: 600px;
